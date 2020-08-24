@@ -17,7 +17,7 @@ mongoose.connect(MONGOURI,{
 
 })
 mongoose.connection.on('connected',()=>{
-    console.log("connected to mongoDB")
+    console.log("connected to mongoDB Yes!")
 })
 
 app.listen(PORT,()=>{
