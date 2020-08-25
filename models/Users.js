@@ -9,8 +9,12 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    phone_number:{
+    phonenumber:{
         type:String,
+        required:true
+    },
+    password:{
+        type: String,
         required:true
     },
     resetToken:String,
