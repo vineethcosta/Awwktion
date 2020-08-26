@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    phonenumber:{
+    phone_number:{
         type:String,
         required:true
     },
@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     },
     resetToken:String,
     expireToken:Date,
-    likes:[{type:ObjectId,ref:"Auctions"}],
+    my_bids:[{type:ObjectId,ref:"Auctions"}],//Auctions which user bids
 },{timestamps:true})
 
 mongoose.model("Users",userSchema)

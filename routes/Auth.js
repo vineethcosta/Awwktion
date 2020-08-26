@@ -10,8 +10,8 @@ const {JWT_SECRET} = require('../config/keys')
 
 
 router.post('/signup',(req,res)=>{
-  const {name,email,password,phonenumber} = req.body 
-  if(!email || !password || !name || !phonenumber){
+  const {name,email,password,phone_number} = req.body 
+  if(!email || !password || !name || !phone_number){
      return res.status(422).json({error:"please add all the fields"})
   }
   User.findOne({email:email})
@@ -25,7 +25,7 @@ router.post('/signup',(req,res)=>{
                 email,
                 password:hashedpassword,
                 name,
-                phonenumber
+                phone_number
             })
     
             user.save()
@@ -53,18 +53,17 @@ router.post('/signin',(req,res)=>{
     User.findOne({email:email})
     .then(savedUser=>{
         if(!savedUser){
-           return res.status(422).json({error:"Invalid Email or password"})
+           return res.status(422).json({error:"email not found"})
         }
         bcrypt.compare(password,savedUser.password)
         .then(doMatch=>{
             if(doMatch){
-                // res.json({message:"successfully signed in"})
                const token = jwt.sign({_id:savedUser._id},JWT_SECRET)
-               const {_id,name,email,followers,following,phonenumber} = savedUser
-               res.json({token,user:{_id,name,email,followers,following,phonenumber}})
+               const {_id,name,email,phone_number,likes} = savedUser
+               res.json({token,user:savedUser})
             }
             else{
-                return res.status(422).json({error:"Invalid Email or password"})
+                return res.status(422).json({error:"Incorrect Password"})
             }
         })
         .catch(err=>{
@@ -90,7 +89,7 @@ router.post('/reset-password',(req,res)=>{
              user.save().then((result)=>{
                  transporter.sendMail({
                      to:user.email,
-                     from:"no-replay@insta.com",
+                     from:"reddyvineeth6@gmail.com",
                      subject:"password reset",
                      html:`
                      <p>You requested for password reset</p>

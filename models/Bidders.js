@@ -1,19 +1,15 @@
 const mongoose = require('mongoose')
 const {ObjectId} = mongoose.Schema.Types
-const userSchema = new mongoose.Schema({
+const bidderSchema = new mongoose.Schema({
     auction_id:{
         type:ObjectId,
         ref:"Auctions"
     },
-    last_price:{
+    bidding_price:{
         type:Number,
         required:true
     },
-    is_active:{
-        type:Boolean,
-        required:true
-    },
-    bidderId:[{type:ObjectId,ref:"Auctions"}],
+    user_id:[{type:ObjectId,ref:"Users"}],
 },{timestamps:true})
 
-mongoose.model("LiveAuctions",userSchema)
+mongoose.model("Bidders",bidderSchema)
