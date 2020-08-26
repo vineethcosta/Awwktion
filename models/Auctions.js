@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const {ObjectId} = mongoose.Schema.Types
-const userSchema = new mongoose.Schema({
+const auctionsSchema = new mongoose.Schema({
     posted_by:{
         type:ObjectId,
         ref:"Users"
@@ -16,12 +16,12 @@ const userSchema = new mongoose.Schema({
         required:true
     },
 
-    is_on_timer:{
-        type:Boolean,
-        required:true
+    base_price:{
+        type:Number,
+        required: true
     },
 
-    auction_activate_timestamp:{
+    auction_ending_timestamp:{
         type: Date,
         required:true
     },
@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    likes:[{type:ObjectId,ref:"Auctions"}],
+    bidders:[{type:ObjectId,ref:"Bidders"}],
 },{timestamps:true})
 
-mongoose.model("Auctions",userSchema)
+mongoose.model("Auctions",auctionsSchema)
