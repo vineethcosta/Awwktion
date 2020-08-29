@@ -72,18 +72,6 @@ router.delete('/deleteauction/:auction_id',requireLogin,(req,res)=>{
 })
 
 
-router.put('/addtomybids/:auction_id',requireLogin,(req,res)=>{
-    User.findByIdAndUpdate(req.user._id,{
-        $push:{my_bids:req.params.auction_id}
-    },{
-        new:true
-    }).exec((err,result)=>{
-        if(err){
-            return res.status(422).json({error:err})
-        }else{
-            res.json(result)
-        }
-    })
-})
+
 
 module.exports = router

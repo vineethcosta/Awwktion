@@ -27,6 +27,7 @@ require('./models/Users')
 app.use(express.json())
 app.use(require('./routes/Auth'))
 app.use(require('./routes/Auctions'))
+app.use(require('./routes/Bids'))
 
 
 app.listen(PORT,()=>{
